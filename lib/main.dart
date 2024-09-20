@@ -1,4 +1,5 @@
 import 'package:delivery_app/src/login/login_page.dart';
+import 'package:delivery_app/src/utils/my_colors.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -20,6 +21,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       initialRoute: 'login',
       routes: {'login': (BuildContext context) => const LoginPage()},
+      theme: ThemeData(primaryColor: MyColors.primaryColor),
     );
   }
 }
