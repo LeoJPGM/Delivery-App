@@ -1,5 +1,6 @@
 import 'package:delivery_app/src/utils/my_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -12,7 +13,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+      body: SizedBox(
         width: double.infinity,
         child: Stack(
           children: [
@@ -20,7 +21,7 @@ class _LoginPageState extends State<LoginPage> {
             Positioned(top: 60, left: 25, child: _textLogin()),
             Column(
               children: [
-                _imageBanner(),
+                _lottieAnimation(),
                 _textFielEmail(),
                 _textFieldPassword(),
                 _buttonLogin(),
@@ -30,6 +31,15 @@ class _LoginPageState extends State<LoginPage> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _lottieAnimation() {
+    return Container(
+      margin: EdgeInsets.only(
+          top: 150, bottom: MediaQuery.of(context).size.height * 0.15),
+      child: Lottie.asset('assets/json/delivery.json',
+          width: 350, height: 200, fit: BoxFit.fill),
     );
   }
 
@@ -47,19 +57,10 @@ class _LoginPageState extends State<LoginPage> {
     return const Text(
       'LOGIN',
       style: TextStyle(
-          color: Colors.white, fontWeight: FontWeight.bold, fontSize: 22),
-    );
-  }
-
-  Widget _imageBanner() {
-    return Container(
-      margin: EdgeInsets.only(
-          top: 100, bottom: MediaQuery.of(context).size.height * 0.22),
-      child: Image.asset(
-        'assets/img/delivery.png',
-        width: 200,
-        height: 200,
-      ),
+          color: Colors.white,
+          fontFamily: 'NimbusSans',
+          fontWeight: FontWeight.bold,
+          fontSize: 22),
     );
   }
 
