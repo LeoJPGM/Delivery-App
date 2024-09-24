@@ -1,3 +1,4 @@
+import 'package:delivery_app/src/login/login_controller.dart';
 import 'package:delivery_app/src/utils/my_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -10,6 +11,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final LoginController _controller = LoginController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,14 +22,16 @@ class _LoginPageState extends State<LoginPage> {
           children: [
             Positioned(top: -80, left: -100, child: _circleLogin()),
             Positioned(top: 60, left: 25, child: _textLogin()),
-            Column(
-              children: [
-                _lottieAnimation(),
-                _textFielEmail(),
-                _textFieldPassword(),
-                _buttonLogin(),
-                _textDontHaveAccount()
-              ],
+            SingleChildScrollView(
+              child: Column(
+                children: [
+                  _lottieAnimation(),
+                  _textFielEmail(),
+                  _textFieldPassword(),
+                  _buttonLogin(),
+                  _textDontHaveAccount()
+                ],
+              ),
             ),
           ],
         ),
@@ -71,6 +76,8 @@ class _LoginPageState extends State<LoginPage> {
           color: MyColors.primaryOpacityColor,
           borderRadius: BorderRadius.circular(30)),
       child: TextField(
+        controller: _controller.emailController,
+        keyboardType: TextInputType.emailAddress,
         decoration: InputDecoration(
             hintText: "Correo electrónico",
             border: InputBorder.none,
@@ -88,6 +95,8 @@ class _LoginPageState extends State<LoginPage> {
           color: MyColors.primaryOpacityColor,
           borderRadius: BorderRadius.circular(30)),
       child: TextField(
+        controller: _controller.passwordController,
+        obscureText: true,
         decoration: InputDecoration(
             hintText: "Contraseña",
             border: InputBorder.none,
@@ -103,7 +112,7 @@ class _LoginPageState extends State<LoginPage> {
       width: double.infinity,
       margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 30),
       child: ElevatedButton(
-          onPressed: () {},
+          onPressed: () => _controller.login(),
           style: ElevatedButton.styleFrom(
               backgroundColor: MyColors.primaryColor,
               shape: RoundedRectangleBorder(
@@ -127,11 +136,14 @@ class _LoginPageState extends State<LoginPage> {
         const SizedBox(
           width: 7,
         ),
-        Text("Registrate",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: MyColors.primaryColor,
-            ))
+        GestureDetector(
+          onTap: () => _controller.goToRegisterPage(context),
+          child: Text("Registrate",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: MyColors.primaryColor,
+              )),
+        )
       ],
     );
   }
