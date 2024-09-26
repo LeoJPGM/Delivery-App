@@ -1,6 +1,7 @@
-import 'package:delivery_app/src/register/register_controller.dart';
+import 'package:delivery_app/src/pages/register/register_controller.dart';
 import 'package:delivery_app/src/utils/my_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -11,6 +12,16 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   final RegisterController _controller = RegisterController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+      _controller.init(context);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,7 +74,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Widget _iconBack() {
     return IconButton(
-        onPressed: () => _controller.goToLoginPage(context),
+        onPressed: _controller.goToLoginPage,
         color: Colors.white,
         icon: const Icon(Icons.arrow_back_ios));
   }
@@ -205,7 +216,7 @@ class _RegisterPageState extends State<RegisterPage> {
       width: double.infinity,
       margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 30),
       child: ElevatedButton(
-          onPressed: () => _controller.register(),
+          onPressed: () => _controller.register(context),
           style: ElevatedButton.styleFrom(
               backgroundColor: MyColors.primaryColor,
               shape: RoundedRectangleBorder(

@@ -1,5 +1,6 @@
-import 'package:delivery_app/src/login/login_page.dart';
-import 'package:delivery_app/src/register/register_page.dart';
+import 'package:delivery_app/src/pages/client/products/list/client_products_list_page.dart';
+import 'package:delivery_app/src/pages/login/login_page.dart';
+import 'package:delivery_app/src/pages/register/register_page.dart';
 import 'package:delivery_app/src/utils/my_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -23,7 +24,8 @@ class _MyAppState extends State<MyApp> {
       initialRoute: 'login',
       routes: {
         'login': (context) => const LoginPage(),
-        'register': (context) => const RegisterPage()
+        'register': (context) => const RegisterPage(),
+        'client/products/list': (context) => const ClientProductsListPage()
       },
       theme: ThemeData(primaryColor: MyColors.primaryColor),
     );
